@@ -1,50 +1,34 @@
 # InsightStream — AI News Analyst
 
-InsightStream is a lightweight Streamlit app that ingests news article URLs, builds a FAISS vectorstore of embeddings, and answers user questions over the ingested content using retrieval-augmented LLM workflows.
+InsightStream is a compact Streamlit app that ingests news article URLs, builds a FAISS vectorstore of embeddings, and answers questions over the ingested content using retrieval-augmented LLM workflows.
 
-## Key features
-- Ingest articles from provided URLs
-- Token-aware text splitting for reliable chunking
-- Build and persist a FAISS vectorstore of embeddings
-- Ask questions and get answers with source references
-- Modular structure: `ui/` for presentation, `services/` for data and model logic
+## Quick start
 
-## Requirements
-- Python 3.9+
-- Recommended packages (install via pip):
-  pip install -r requirements.txt
-  or
-  pip install streamlit langchain openai transformers sentence-transformers faiss-cpu python-dotenv langchain-community
+1. Add credentials in a local `.env` (do not commit this file). Typical keys:
+   - GROQ_API_KEY or OPENAI_API_KEY (depending on which provider you configure).
 
-Note: FAISS installation may vary by platform. Use `faiss-cpu` on many Linux/Windows systems, or consult FAISS docs for alternatives.
+2. Install dependencies using your project tool (pyproject.toml is provided). If you use `uv` for dependency management and execution, run the app with:
+   uv run streamlit run main.py
 
-## Setup
-1. Clone or copy the project folder to your machine.
-2. Create a `.env` file in the project root with at least:
-   OPENAI_API_KEY=your_openai_api_key
-3. Install dependencies (see Requirements).
+   Alternatively, use your preferred environment manager and run:
+   streamlit run main.py
 
-## Run
-From the project folder that contains `main.py`:
-- Open a terminal and run:
-  streamlit run main.py
-
-If you have multiple `main.py` copies in subfolders, run the one for the app you want (for example `3-InsightStream/main.py`).
+## Project layout
+- ui/ — Streamlit UI, layout and components
+- services/ — ingestion, embeddings, QA logic
+- pyproject.toml & uv.lock — dependency metadata for your environment tool
 
 ## Configuration
-- INDEX_PATH: path for the saved FAISS index (default in code: `faiss_index`).
-- UI styles and layout are in `ui/layout.py` and `ui/components.py`.
-- Ingestion logic is in `services/ingestion.py`.
-- QA and embedding helpers are in `services/qa.py` and `services/embeddings.py`.
+- INDEX_PATH in code is `faiss_index` by default — change if required.
+- Keep API keys in `.env` and ensure they are available to the process (dotenv is used).
 
-## Development
-- Keep UI concerns inside `ui/` and model/data logic inside `services/`.
-- Add or update unit tests as files change.
-- When updating dependencies, test FAISS and transformer behavior locally.
+## Notes
+- FAISS may require platform-specific wheels (faiss-cpu is recommended for CPU setups).
+- If the saved index becomes invalid, re-run ingestion via the sidebar to rebuild.
 
 ## Troubleshooting
-- If index loading fails, rebuild by re-processing URLs in the sidebar.
-- If OpenAI calls fail, verify `OPENAI_API_KEY` and network access.
+- If embeddings or OpenAI/Groq calls fail, verify keys and network access.
+- If Streamlit shows layout issues after CSS changes, restart the app and clear browser cache.
 
 ## License
-Add your preferred license or keep proprietary as desired.
+Choose and add a license file if you intend to

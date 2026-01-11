@@ -17,5 +17,6 @@ dependencies = [
     "python-magic-bin>=0.4.14",
     "streamlit>=1.30.0",
     "unstructured>=0.12.0",
-    "sentence-transformers"
+    "sentence-transformers",
+    "git-filter-repo>=2.47.0",
 ]
