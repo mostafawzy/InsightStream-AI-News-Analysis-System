@@ -29,6 +29,3 @@ InsightStream is a compact Streamlit app that ingests news article URLs, builds 
 ## Troubleshooting
 - If embeddings or OpenAI/Groq calls fail, verify keys and network access.
 - If Streamlit shows layout issues after CSS changes, restart the app and clear browser cache.
-
-## License
-Choose and add a license file if you intend to
